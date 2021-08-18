@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:modular_navigation/modular_navigation.dart';
 
-class NotFoundPage extends StatelessWidget {
+class NotFoundPage extends ModularPage<NoPageParameters> {
+  NotFoundPage() : super(parameters: NoPageParameters());
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text("Not Found"),
+    return SafeArea(
+      child: Scaffold(
+        body: Text("Not Found"),
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 part of modular_navigation;
 
-abstract class PageParameters {
+abstract class PageParameters extends Object {
   @protected
   final Map<String, String?> _map;
 

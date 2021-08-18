@@ -1,8 +1,8 @@
 part of modular_navigation;
 
-extension ContextNavigateTo on BuildContext {
+extension RouterDelegateExtensions on GlobalKey<NavigatorState> {
   ModularRouterDelegate get _delegate =>
-      Router.of(this).routerDelegate as ModularRouterDelegate;
+      Router.of(this.currentContext!).routerDelegate as ModularRouterDelegate;
 
   void goBack({
     bool clearHistory = false,
@@ -10,8 +10,8 @@ extension ContextNavigateTo on BuildContext {
   }) =>
       _delegate.popRoute();
 
-  void navigateTo({
-    required ModularPage page,
+  void navigateTo(
+    ModularPage page, {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>

@@ -1,7 +1,8 @@
 name: modular_navigation
 description: Modular Navigation
-version: 0.0.1
-publish_to: none
+version: 0.0.2
+homepage: https://github.com/Concerti-IO/modular_navigation
+publish_to: https://pub.dev/modular_navigation
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

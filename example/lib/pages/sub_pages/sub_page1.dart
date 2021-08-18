@@ -1,5 +1,5 @@
+import 'package:example/pages/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:modular_navigation/modular_navigation.dart';
 
 class SubPage1Parameters extends PageParameters {
@@ -11,14 +11,20 @@ class SubPage1Parameters extends PageParameters {
   set id(String value) => map['id'] = value;
 }
 
-class SubPage1 extends StatelessWidget {
-  final SubPage1Parameters parameters;
-  SubPage1(this.parameters);
+class SubPage1 extends ModularPage<SubPage1Parameters> {
+  SubPage1(SubPage1Parameters parameters) : super(parameters: parameters);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text(parameters.id),
+    return SafeArea(
+      child: Scaffold(
+        body: Text(parameters.id),
+        floatingActionButton: FloatingActionButton(
+          heroTag: "Home",
+          onPressed: () => context.navigateTo(page: HomePage()),
+          child: Icon(Icons.home),
+        ),
+      ),
     );
   }
 }

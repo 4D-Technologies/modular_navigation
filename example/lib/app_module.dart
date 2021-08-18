@@ -1,32 +1,36 @@
-import 'package:example/pages/splash.dart';
+import 'package:example/pages/not_found.dart';
 
 import 'pages/home.dart';
-import 'pages/sub_pages/sub_module.dart';
 import 'package:modular_navigation/modular_navigation.dart';
+
+import 'pages/sub_pages/sub_module.dart';
 
 class AppModule extends RootModule {
   @override
-  PageRouteMap get homeRoute => PageRouteMap(
-        route: "home",
-        createPage: (_, __) => HomePage(),
+  ModularRoute get homeRoute => ModularRoute<NoPageParameters, HomePage>(
+        //Note because of weakness in Dart's Generics functionality, you MUST define the generic parameters when defining ModularRoute
+        route: "/",
+        createPage: (_) => HomePage(),
       );
 
   @override
-  PageRouteMap get initialRoute =>
-      PageRouteMap(route: "", createPage: (_, __) => SplashPage());
+  ModularRoute get initialRoute =>
+      homeRoute; //This can be a splash screen if you have more configuration to complete and then navigate away once you're done as an example.
 
   @override
-  PageRouteMap get notFoundRoute => throw UnimplementedError();
+  ModularRoute get notFoundRoute =>
+      ModularRoute<NoPageParameters, NotFoundPage>(
+        route: "/notfound",
+        createPage: (_) => NotFoundPage(),
+      );
 
   @override
-  Iterable<PageRouteMap> get routeMap => [
+  Iterable<ModularRoute> get routes => [
         homeRoute,
         initialRoute,
         notFoundRoute,
       ];
 
-  final subModule = SubModule();
-
   @override
-  Iterable<BaseModule> get subModules => [subModule];
+  Iterable<BaseModule> get subModules => [SubPagesModule(route)];
 }

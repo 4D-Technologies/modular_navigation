@@ -1,19 +1,25 @@
 part of modular_navigation;
 
-class ModularRouterDelegate extends RouterDelegate<NavigationHistory>
-    with ChangeNotifier, PopNavigatorRouterDelegateMixin<NavigationHistory> {
+class ModularRouterDelegate extends RouterDelegate<ModularPage>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin<ModularPage> {
   @override
   final GlobalKey<NavigatorState> navigatorKey;
+  final RootModule rootModule;
+  final Future<void> Function(ModularPage<PageParameters> configuration)?
+      setInitialRoutePathOverride;
 
-  final _history = List<NavigationHistory>.empty(growable: true);
+  final _history = List<ModularHistory>.empty(growable: true);
 
-  ModularRouterDelegate({required this.navigatorKey});
+  ModularRouterDelegate({
+    required this.navigatorKey,
+    required this.rootModule,
+    this.setInitialRoutePathOverride,
+  }) : super();
 
-  List<NavigationHistory> get history => _history;
+  List<ModularHistory> get history => _history;
 
-  void navigateTo(
-    BuildContext context,
-    ModularRoute route, {
+  void navigateTo({
+    required ModularPage page,
     bool clearHistory = false,
     bool removeCurrent = false,
   }) {
@@ -23,16 +29,11 @@ class ModularRouterDelegate extends RouterDelegate<NavigationHistory>
       _history.removeLast();
     }
 
-    _history.add(
-      NavigationHistory(
-        route: route.route,
-        parameters: route.parameters?.map,
-        page: route.createPage(
-          context,
-          route.parameters,
-        ),
-      ),
-    );
+    final route = rootModule.findRouteByPageType(page.runtimeType);
+
+    if (route == null) throw RouteNotFoundException();
+
+    _history.add(ModularHistory(route, page));
 
     notifyListeners();
   }
@@ -42,7 +43,9 @@ class ModularRouterDelegate extends RouterDelegate<NavigationHistory>
     return Navigator(
       key: navigatorKey,
       pages: this
-          ._history, //Unless you want to have a really bad day debugging, don't take the .toList() off of this.
+          ._history
+          .map((e) => e.page)
+          .toList(), //Unless you want to have a really bad day debugging, don't take the .toList() off of this.
       onPopPage: (Route<dynamic> route, dynamic result) {
         if (!route.didPop(result)) return false;
 
@@ -72,12 +75,27 @@ class ModularRouterDelegate extends RouterDelegate<NavigationHistory>
   }
 
   @override
-  Future<void> setNewRoutePath(NavigationHistory configuration) async {
-    _history.add(configuration);
+  Future<void> setNewRoutePath(ModularPage configuration) {
+    final route = rootModule.findRouteByPageType(configuration.runtimeType);
+
+    if (route == null) throw RouteNotFoundException();
+
+    _history.add(ModularHistory(route, configuration));
     notifyListeners();
+
+    return SynchronousFuture(null);
   }
 
   @override
-  NavigationHistory? get currentConfiguration =>
-      _history.isEmpty ? null : _history.last;
+  ModularPage? get currentConfiguration =>
+      _history.isEmpty ? null : _history.last.page;
+
+  @override
+  Future<void> setInitialRoutePath(ModularPage<PageParameters> configuration) {
+    if (setInitialRoutePathOverride != null)
+      return setInitialRoutePath(configuration);
+
+    return super.setInitialRoutePath(
+        rootModule.initialRoute.createPage(NoPageParameters().map));
+  }
 }
