@@ -18,20 +18,59 @@ class ModularRouterDelegate extends RouterDelegate<ModularPage>
 
   List<ModularHistory> get history => _history;
 
-  void navigateTo({
+  FutureOr<void> navigateToUri({
+    required Uri uri,
+    bool clearHistory = false,
+    bool removeCurrent = false,
+  }) {
+    final route = rootModule.findRoute(uri.path);
+
+    if (route == null) throw RouteNotFoundException();
+
+    final page = route.createPage(uri.queryParameters);
+
+    _completeNavigation(
+      route: route,
+      page: page,
+      clearHistory: clearHistory,
+      removeCurrent: removeCurrent,
+    );
+  }
+
+  FutureOr<void> navigateTo({
     required ModularPage page,
     bool clearHistory = false,
     bool removeCurrent = false,
   }) {
+    final route = rootModule.findRouteByPageType(page.runtimeType);
+
+    if (route == null) throw RouteNotFoundException();
+
+    _completeNavigation(
+      route: route,
+      page: page,
+      clearHistory: clearHistory,
+      removeCurrent: removeCurrent,
+    );
+  }
+
+  FutureOr<void> _completeNavigation({
+    required ModularRoute route,
+    required ModularPage page,
+    required bool clearHistory,
+    required bool removeCurrent,
+  }) async {
+    final fullRoute = ModularHistory(route, page);
+
+    if ((route.module.guard != null &&
+            !await route.module.guard!(fullRoute, this)) ||
+        (route.guard != null && !await route.guard!(fullRoute, this))) return;
+
     if (clearHistory) {
       _history.clear();
     } else if (removeCurrent) {
       _history.removeLast();
     }
-
-    final route = rootModule.findRouteByPageType(page.runtimeType);
-
-    if (route == null) throw RouteNotFoundException();
 
     _history.add(ModularHistory(route, page));
 

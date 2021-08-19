@@ -4,6 +4,10 @@ Modular navigation sets out to replicate as closely as possible the excellent na
 
 Modular Navigation is fully compatible with GetIt injection and works well with authentication mechanisms.
 
+Modular Navigation fully supports route guards and also supports module-wide guards.
+
+Modular Navigation is designed for future functionality for code splitting on flutter web when ready.
+
 ## Getting Started
 
 1. Create a root module defining all of the defaults and any sub modules you need.

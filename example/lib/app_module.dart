@@ -1,3 +1,4 @@
+import 'package:example/pages/login.dart';
 import 'package:example/pages/not_found.dart';
 
 import 'pages/home.dart';
@@ -9,6 +10,7 @@ class AppModule extends RootModule {
   @override
   ModularRoute get homeRoute => ModularRoute<NoPageParameters, HomePage>(
         //Note because of weakness in Dart's Generics functionality, you MUST define the generic parameters when defining ModularRoute
+        module: this,
         route: "/",
         createPage: (_) => HomePage(),
       );
@@ -20,6 +22,7 @@ class AppModule extends RootModule {
   @override
   ModularRoute get notFoundRoute =>
       ModularRoute<NoPageParameters, NotFoundPage>(
+        module: this,
         route: "/notfound",
         createPage: (_) => NotFoundPage(),
       );
@@ -29,8 +32,17 @@ class AppModule extends RootModule {
         homeRoute,
         initialRoute,
         notFoundRoute,
+        ModularRoute<LoginPageParameters, LoginPage>(
+          module: this,
+          route: "/login",
+          createPage: (parameters) => LoginPage(
+            LoginPageParameters.fromMap(parameters),
+          ),
+        ),
       ];
 
   @override
-  Iterable<BaseModule> get subModules => [SubPagesModule(route)];
+  Iterable<BaseModule> get subModules => [
+        SubPagesModule(this),
+      ];
 }

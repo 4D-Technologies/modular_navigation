@@ -5,16 +5,19 @@ abstract class BaseModule {
   Iterable<ModularRoute> get routes;
   Iterable<BaseModule> get subModules;
 
-  const BaseModule();
+  final FutureOr<bool> Function(
+      ModularHistory route, ModularRouterDelegate delegate)? guard;
+
+  const BaseModule(this.guard);
 
   bool hasRoute(String route) => routes.any((m) => m.route == route);
 
   ModularRoute? findRoute(String route) {
-    if (!route.toLowerCase().startsWith(route.toLowerCase())) return null;
+    if (!route.toLowerCase().startsWith(this.route.toLowerCase())) return null;
 
-    var result = routes.cast<ModularRoute?>().firstWhere(
-        (e) => e != null && route + e.route == route,
-        orElse: () => null);
+    var result = routes
+        .cast<ModularRoute?>()
+        .firstWhere((e) => e != null && e.route == route, orElse: () => null);
 
     if (result != null) return result;
 

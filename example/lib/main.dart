@@ -7,6 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static bool loggedIn = false;
   static final navigatorKey = GlobalKey<NavigatorState>();
   static final appModule = AppModule();
   static final routerDelegate =

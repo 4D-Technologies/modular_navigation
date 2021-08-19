@@ -10,13 +10,24 @@ extension ContextNavigateTo on BuildContext {
   }) =>
       _delegate.popRoute();
 
-  void navigateTo({
+  FutureOr<void> navigateTo({
     required ModularPage page,
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>
       _delegate.navigateTo(
         page: page,
+        clearHistory: clearHistory,
+        removeCurrent: removeCurrent,
+      );
+
+  FutureOr<void> navigateByUri({
+    required Uri uri,
+    bool clearHistory = false,
+    bool removeCurrent = false,
+  }) =>
+      _delegate.navigateToUri(
+        uri: uri,
         clearHistory: clearHistory,
         removeCurrent: removeCurrent,
       );

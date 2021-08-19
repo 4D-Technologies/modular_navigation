@@ -1,5 +1,6 @@
 library modular_navigation;
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
