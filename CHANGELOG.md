@@ -1,4 +1,4 @@
-## [0.0.9]
+## [0.0.11]
 
 - Improve the overrrideInitialRoute function by removing futures because of https://github.com/flutter/flutter/issues/71106
 - Add ModularLink and update extension methods to match the various different ways you can navigate.

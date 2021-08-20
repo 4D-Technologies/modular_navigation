@@ -14,11 +14,13 @@ abstract class RootModule extends BaseModule {
   @override
   String get route => "/";
 
-  ModularLink<TPageParameters>
-      createLink<TPageParameters extends PageParameters>(Type pageType,
-              {TPageParameters? parameters}) =>
-          ModularLink<TPageParameters>(
-            route: findRouteByPageType(pageType)!,
-            parameters: parameters,
-          );
+  ModularLink<TPageParameters> createLink<
+          TPageParameters extends PageParameters,
+          TPageType extends ModularPage<TPageParameters>>({
+    TPageParameters parameters = const NoPageParameters() as TPageParameters,
+  }) =>
+      ModularLink<TPageParameters>(
+        route: findRouteByPageType(TPageType)!,
+        parameters: parameters,
+      );
 }
