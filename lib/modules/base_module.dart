@@ -2,6 +2,7 @@ part of modular_navigation;
 
 abstract class BaseModule {
   String get route;
+
   Iterable<ModularRoute> get routes;
   Iterable<BaseModule> get subModules;
 
@@ -44,6 +45,6 @@ abstract class BaseModule {
         .firstWhere((element) => element != null, orElse: () => null);
 
     return result
-        as ModularRoute<TPageParameters, ModularPage<TPageParameters>>;
+        as ModularRoute<TPageParameters, ModularPage<TPageParameters>>?;
   }
 }

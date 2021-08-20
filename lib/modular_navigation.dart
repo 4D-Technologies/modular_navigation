@@ -30,3 +30,18 @@ part 'routes/noanimationpageroute.dart';
 
 part 'exceptions/page_not_found.dart';
 part 'exceptions/route_not_found.dart';
+
+String combinePath(String rootPath, String path) {
+  rootPath = rootPath.endsWith("/") || rootPath.endsWith("\\")
+      ? rootPath.substring(0, rootPath.length - 1)
+      : rootPath;
+  rootPath = rootPath.replaceAll("\\", "/");
+  path =
+      path.startsWith("/") || path.startsWith("\\") ? path.substring(1) : path;
+  path = path.endsWith("/") || path.endsWith("\\")
+      ? path.substring(0, path.length - 1)
+      : path;
+  path = path.replaceAll("\\", "/");
+
+  return rootPath + "/" + path;
+}

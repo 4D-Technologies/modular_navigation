@@ -6,11 +6,9 @@ import 'package:modular_navigation/modular_navigation.dart';
 import '../../main.dart';
 
 class SubPagesModule extends SubModule {
-  @override
-  String get route => parentModule.route + "sub/";
-
   SubPagesModule(RootModule parentModule)
       : super(
+          route: "sub",
           parentModule: parentModule,
           guard: (route, delegate) {
             if (MyApp.loggedIn) return true;

@@ -13,7 +13,7 @@ class ModularRoute<TPageParameters extends PageParameters,
     required String route,
     required this.createPage,
     this.guard,
-  }) : _route = module.route + route {
+  }) : _route = combinePath(module.route, route) {
     assert(TPageParameters != dynamic && TPageParameters != PageParameters);
     assert(TModularPage != dynamic &&
         !(TModularPage is ModularPage<PageParameters>));

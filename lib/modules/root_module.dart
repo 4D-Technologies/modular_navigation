@@ -17,7 +17,7 @@ abstract class RootModule extends BaseModule {
   ModularLink<TPageParameters> createLink<
           TPageParameters extends PageParameters,
           TPageType extends ModularPage<TPageParameters>>({
-    TPageParameters parameters = const NoPageParameters() as TPageParameters,
+    TPageParameters? parameters,
   }) =>
       ModularLink<TPageParameters>(
         route: findRouteByPageType(TPageType)!,
