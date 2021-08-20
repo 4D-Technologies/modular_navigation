@@ -19,10 +19,12 @@ part 'navigator/route_information_parser.dart';
 part 'navigator/router_delegate.dart';
 part 'navigator/modular_route.dart';
 part 'navigator/modular_history.dart';
+part 'navigator/modular_link.dart';
 
 part 'parameters/page_parameters.dart';
 part 'parameters/no_parameters.dart';
 part 'parameters/id_page_parameters.dart';
+part 'parameters/optional_id_page_parameters.dart';
 
 part 'routes/noanimationpageroute.dart';
 

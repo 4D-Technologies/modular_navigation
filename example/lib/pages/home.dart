@@ -17,15 +17,15 @@ class HomePage extends ModularPage<NoPageParameters> {
             FloatingActionButton(
               heroTag: "SubPage1",
               child: Icon(Icons.one_k),
-              onPressed: () => context.navigateTo(
-                page: SubPage1(
+              onPressed: () => context.navigateToPage(
+                SubPage1(
                   SubPage1Parameters("Testing 1,2,3"),
                 ),
               ),
             ),
             FloatingActionButton(
               heroTag: "SubPage2",
-              onPressed: () => context.navigateTo(page: SubPage2()),
+              onPressed: () => context.navigateToPage(SubPage2()),
               child: Icon(Icons.two_k),
             ),
           ],

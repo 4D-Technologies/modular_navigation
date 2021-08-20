@@ -10,24 +10,32 @@ extension RouterDelegateExtensions on GlobalKey<NavigatorState> {
   }) =>
       _delegate.popRoute();
 
-  FutureOr<void> navigateTo(
+  FutureOr<void> navigateToPage(
     ModularPage page, {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>
-      _delegate.navigateTo(
-        page: page,
+      _delegate.navigateToPage(
+        page,
         clearHistory: clearHistory,
         removeCurrent: removeCurrent,
       );
 
-  FutureOr<void> navigateByUri({
-    required Uri uri,
+  FutureOr<void> navigateToLink(
+    ModularLink link, {
+    bool clearHistory = false,
+    bool removeCurrent = false,
+  }) =>
+      _delegate.navigateToLink(link,
+          clearHistory: clearHistory, removeCurrent: removeCurrent);
+
+  FutureOr<void> navigateToUri(
+    Uri uri, {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>
       _delegate.navigateToUri(
-        uri: uri,
+        uri,
         clearHistory: clearHistory,
         removeCurrent: removeCurrent,
       );

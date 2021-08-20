@@ -15,8 +15,8 @@ class SubPagesModule extends SubModule {
           guard: (route, delegate) {
             if (MyApp.loggedIn) return true;
 
-            delegate.navigateTo(
-              page: LoginPage(
+            delegate.navigateToPage(
+              LoginPage(
                 LoginPageParameters(route.uri.toString()),
               ),
               clearHistory: true,

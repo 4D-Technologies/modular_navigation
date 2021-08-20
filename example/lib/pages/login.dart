@@ -20,7 +20,7 @@ class LoginPage extends ModularPage<LoginPageParameters> {
         body: IconButton(
           onPressed: () {
             MyApp.loggedIn = true;
-            context.navigateByUri(uri: parameters.redirectUrl);
+            context.navigateToUri(parameters.redirectUrl);
           },
           icon: Icon(Icons.login),
         ),

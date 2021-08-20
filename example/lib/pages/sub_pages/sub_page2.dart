@@ -13,7 +13,7 @@ class SubPage2 extends ModularPage<NoPageParameters> {
         body: Text("Sub Page 2"),
         floatingActionButton: FloatingActionButton(
           heroTag: "Home",
-          onPressed: () => context.navigateTo(page: HomePage()),
+          onPressed: () => context.navigateToPage(HomePage()),
           child: Icon(Icons.home),
         ),
       ),

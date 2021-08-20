@@ -21,7 +21,7 @@ class SubPage1 extends ModularPage<SubPage1Parameters> {
         body: Text(parameters.id),
         floatingActionButton: FloatingActionButton(
           heroTag: "Home",
-          onPressed: () => context.navigateTo(page: HomePage()),
+          onPressed: () => context.navigateToPage(HomePage()),
           child: Icon(Icons.home),
         ),
       ),

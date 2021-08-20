@@ -5,8 +5,8 @@ class ModularRouterDelegate extends RouterDelegate<ModularPage>
   @override
   final GlobalKey<NavigatorState> navigatorKey;
   final RootModule rootModule;
-  final Future<void> Function(ModularPage<PageParameters> configuration)?
-      setInitialRoutePathOverride;
+  final ModularPage<PageParameters> Function(
+      ModularPage<PageParameters> configuration)? setInitialRoutePathOverride;
 
   final _history = List<ModularHistory>.empty(growable: true);
 
@@ -18,8 +18,24 @@ class ModularRouterDelegate extends RouterDelegate<ModularPage>
 
   List<ModularHistory> get history => _history;
 
-  FutureOr<void> navigateToUri({
-    required Uri uri,
+  FutureOr<void> navigateToLink(
+    ModularLink link, {
+    bool clearHistory = false,
+    bool removeCurrent = false,
+  }) {
+    final page =
+        link.route.createPage(link.parameters?.map ?? NoPageParameters().map);
+
+    _completeNavigation(
+      route: link.route,
+      page: page,
+      clearHistory: clearHistory,
+      removeCurrent: removeCurrent,
+    );
+  }
+
+  FutureOr<void> navigateToUri(
+    Uri uri, {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) {
@@ -37,8 +53,8 @@ class ModularRouterDelegate extends RouterDelegate<ModularPage>
     );
   }
 
-  FutureOr<void> navigateTo({
-    required ModularPage page,
+  FutureOr<void> navigateToPage(
+    ModularPage page, {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) {
@@ -131,10 +147,13 @@ class ModularRouterDelegate extends RouterDelegate<ModularPage>
 
   @override
   Future<void> setInitialRoutePath(ModularPage<PageParameters> configuration) {
-    if (setInitialRoutePathOverride != null)
-      return setInitialRoutePath(configuration);
+    if (setInitialRoutePathOverride != null) {
+      configuration = setInitialRoutePathOverride!(configuration);
+    } else {
+      configuration =
+          rootModule.initialRoute.createPage(NoPageParameters().map);
+    }
 
-    return super.setInitialRoutePath(
-        rootModule.initialRoute.createPage(NoPageParameters().map));
+    return super.setInitialRoutePath(configuration);
   }
 }
