@@ -28,17 +28,22 @@ abstract class BaseModule {
     return result;
   }
 
-  ModularRoute? findRouteByPageType(Type pageType) {
+  ModularRoute<TPageParameters, ModularPage<TPageParameters>>?
+      findRouteByPageType<TPageParameters extends PageParameters>(
+          Type pageType) {
     var result = routes.cast<ModularRoute?>().firstWhere(
         (e) => e != null && e.isPageRoute(pageType),
         orElse: () => null);
 
-    if (result != null) return result;
+    if (result != null)
+      return result
+          as ModularRoute<TPageParameters, ModularPage<TPageParameters>>;
 
     result = subModules
         .map((e) => e.findRouteByPageType(pageType))
         .firstWhere((element) => element != null, orElse: () => null);
 
-    return result;
+    return result
+        as ModularRoute<TPageParameters, ModularPage<TPageParameters>>;
   }
 }

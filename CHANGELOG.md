@@ -1,7 +1,8 @@
-## [0.0.8]
+## [0.0.9]
 
 - Improve the overrrideInitialRoute function by removing futures because of https://github.com/flutter/flutter/issues/71106
 - Add ModularLink and update extension methods to match the various different ways you can navigate.
+- Added createLink to the Root module to allow easy creation of module links for lazy navigation
 
 ## [0.0.5]
 
