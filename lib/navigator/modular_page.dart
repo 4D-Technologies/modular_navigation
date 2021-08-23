@@ -34,4 +34,18 @@ abstract class ModularPage<TPageParameters extends PageParameters>
 
   @override
   String? get restorationId => jsonEncode(parameters.map);
+
+  @override
+  operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is ModularPage &&
+        o.parameters == parameters &&
+        o.animation == animation &&
+        o.runtimeType == o.runtimeType;
+  }
+
+  @override
+  int get hashCode =>
+      parameters.hashCode & animation.hashCode & runtimeType.hashCode;
 }

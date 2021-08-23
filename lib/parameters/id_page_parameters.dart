@@ -7,4 +7,15 @@ class IdPageParameters extends PageParameters {
 
   String get id => map['id']!;
   set id(String value) => map['id'] = value;
+
+  @override
+  operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return (o is IdPageParameters && o.id == id) ||
+        (o is OptionalIdPageParameters && o.id == id);
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }

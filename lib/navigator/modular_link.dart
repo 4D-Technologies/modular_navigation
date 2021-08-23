@@ -7,4 +7,16 @@ class ModularLink<TPageParameters extends PageParameters> {
     required this.route,
     this.parameters,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ModularLink<TPageParameters> &&
+        other.route == route &&
+        other.parameters == parameters;
+  }
+
+  @override
+  int get hashCode => route.hashCode ^ parameters.hashCode;
 }

@@ -8,4 +8,14 @@ class ModularHistory<TPageParameters extends PageParameters,
 
   Uri get uri =>
       Uri.parse(route.route).replace(queryParameters: page.parameters.map);
+
+  @override
+  operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is ModularHistory && o.route == route && o.page == page;
+  }
+
+  @override
+  int get hashCode => route.hashCode & page.hashCode;
 }

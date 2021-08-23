@@ -1,3 +1,7 @@
+## [0.0.15] - August 23rd, 2021
+
+- Enable equality operations on most objects.
+
 ## [0.0.14] - August 20th, 2021
 
 - Improve the overrrideInitialRoute function by removing futures because of https://github.com/flutter/flutter/issues/71106

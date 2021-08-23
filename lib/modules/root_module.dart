@@ -23,4 +23,26 @@ abstract class RootModule extends BaseModule {
         route: findRouteByPageType(TPageType)!,
         parameters: parameters,
       );
+
+  @override
+  operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is RootModule &&
+        o.initialRoute == initialRoute &&
+        o.homeRoute == homeRoute &&
+        o.notFoundRoute == notFoundRoute &&
+        o.route == route &&
+        o.routes == routes &&
+        o.subModules == subModules;
+  }
+
+  @override
+  int get hashCode =>
+      route.hashCode &
+      initialRoute.hashCode &
+      homeRoute.hashCode &
+      notFoundRoute.hashCode &
+      routes.hashCode &
+      subModules.hashCode;
 }

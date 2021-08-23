@@ -22,4 +22,17 @@ class ModularRoute<TPageParameters extends PageParameters,
   String get route => _route;
 
   bool isPageRoute(Type pageType) => pageType == TModularPage;
+
+  @override
+  operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is ModularRoute &&
+        o.route == route &&
+        o.module == module &&
+        o.guard == guard;
+  }
+
+  @override
+  int get hashCode => route.hashCode & module.hashCode & guard.hashCode;
 }

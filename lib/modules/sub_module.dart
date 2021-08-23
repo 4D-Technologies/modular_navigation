@@ -17,4 +17,22 @@ abstract class SubModule extends BaseModule {
 
   @override
   String get route => combinePath(parentModule.route, _path);
+
+  @override
+  operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is SubModule &&
+        o.route == route &&
+        o.routes == routes &&
+        o.subModules == subModules &&
+        o.parentModule == parentModule;
+  }
+
+  @override
+  int get hashCode =>
+      route.hashCode &
+      parentModule.hashCode &
+      routes.hashCode &
+      subModules.hashCode;
 }
