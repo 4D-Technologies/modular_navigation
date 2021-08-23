@@ -1,6 +1,7 @@
-## [0.0.15] - August 23rd, 2021
+## [0.0.17] - August 23rd, 2021
 
 - Enable equality operations on most objects.
+- Enable create, createLink, and navigate on routes and refactor example to use these to navigate strongly without breaking the tree of requirements. This uses the createPage function internally so that when using code injection there is a single place for creating the pages.
 
 ## [0.0.14] - August 20th, 2021
 

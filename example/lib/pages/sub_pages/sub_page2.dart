@@ -1,11 +1,8 @@
+import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:modular_navigation/modular_navigation.dart';
 
-import '../home.dart';
-
-class SubPage2 extends ModularPage<NoPageParameters> {
-  SubPage2() : super(parameters: NoPageParameters());
-
+class SubPage2 extends NoParametersModularPage {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -13,7 +10,7 @@ class SubPage2 extends ModularPage<NoPageParameters> {
         body: Text("Sub Page 2"),
         floatingActionButton: FloatingActionButton(
           heroTag: "Home",
-          onPressed: () => context.navigateToPage(HomePage()),
+          onPressed: () => MyApp.appModule.homeRoute.navigate(context: context),
           child: Icon(Icons.home),
         ),
       ),

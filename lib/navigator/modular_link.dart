@@ -8,6 +8,18 @@ class ModularLink<TPageParameters extends PageParameters> {
     this.parameters,
   });
 
+  void navigate(
+    BuildContext context, {
+    bool clearHistory = false,
+    bool removeCurrent = false,
+  }) {
+    context.routeDelegate.navigateToLink(
+      this,
+      clearHistory: clearHistory,
+      removeCurrent: removeCurrent,
+    );
+  }
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;

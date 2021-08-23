@@ -1,5 +1,4 @@
 import 'package:example/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modular_navigation/modular_navigation.dart';
 

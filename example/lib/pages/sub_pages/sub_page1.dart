@@ -1,4 +1,4 @@
-import 'package:example/pages/home.dart';
+import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:modular_navigation/modular_navigation.dart';
 
@@ -21,7 +21,7 @@ class SubPage1 extends ModularPage<SubPage1Parameters> {
         body: Text(parameters.id),
         floatingActionButton: FloatingActionButton(
           heroTag: "Home",
-          onPressed: () => context.navigateToPage(HomePage()),
+          onPressed: () => MyApp.appModule.homeRoute.navigate(context: context),
           child: Icon(Icons.home),
         ),
       ),

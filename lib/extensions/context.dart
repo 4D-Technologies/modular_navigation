@@ -1,21 +1,21 @@
 part of modular_navigation;
 
 extension ContextNavigateTo on BuildContext {
-  ModularRouterDelegate get _delegate =>
+  ModularRouterDelegate get routeDelegate =>
       Router.of(this).routerDelegate as ModularRouterDelegate;
 
   void goBack({
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>
-      _delegate.popRoute();
+      routeDelegate.popRoute();
 
   FutureOr<void> navigateToPage(
     ModularPage page, {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>
-      _delegate.navigateToPage(
+      routeDelegate.navigateToPage(
         page,
         clearHistory: clearHistory,
         removeCurrent: removeCurrent,
@@ -26,7 +26,7 @@ extension ContextNavigateTo on BuildContext {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>
-      _delegate.navigateToLink(link,
+      routeDelegate.navigateToLink(link,
           clearHistory: clearHistory, removeCurrent: removeCurrent);
 
   FutureOr<void> navigateToUri(
@@ -34,13 +34,13 @@ extension ContextNavigateTo on BuildContext {
     bool clearHistory = false,
     bool removeCurrent = false,
   }) =>
-      _delegate.navigateToUri(
+      routeDelegate.navigateToUri(
         uri,
         clearHistory: clearHistory,
         removeCurrent: removeCurrent,
       );
 
-  ModularPage get currentRoute => _delegate.currentConfiguration!;
+  ModularPage get currentRoute => routeDelegate.currentConfiguration!;
 
-  List<ModularHistory> get navigationHistory => _delegate.history;
+  List<ModularHistory> get navigationHistory => routeDelegate.history;
 }

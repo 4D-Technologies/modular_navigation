@@ -24,19 +24,23 @@ class SubPagesModule extends SubModule {
           },
         );
 
+  get page1Route => ModularRoute<SubPage1Parameters, SubPage1>(
+        module: this,
+        route: "page1",
+        createPage: (params) => SubPage1(
+          SubPage1Parameters.fromMap(params),
+        ),
+      );
+
+  get page2Route => NoPageParametersRoute(
+        module: this,
+        route: "page2",
+        createPage: () => SubPage2(),
+      );
+
   @override
   Iterable<ModularRoute> get routes => [
-        ModularRoute<SubPage1Parameters, SubPage1>(
-          module: this,
-          route: "page1",
-          createPage: (params) => SubPage1(
-            SubPage1Parameters.fromMap(params),
-          ),
-        ),
-        ModularRoute<NoPageParameters, SubPage2>(
-          module: this,
-          route: "page2",
-          createPage: (_) => SubPage2(),
-        ),
+        page1Route,
+        page2Route,
       ];
 }

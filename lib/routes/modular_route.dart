@@ -23,6 +23,31 @@ class ModularRoute<TPageParameters extends PageParameters,
 
   bool isPageRoute(Type pageType) => pageType == TModularPage;
 
+  ModularPage<TPageParameters> create({
+    TPageParameters? parameters,
+  }) =>
+      createPage(parameters!.map);
+
+  ModularLink createLink({
+    TPageParameters? parameters,
+  }) =>
+      ModularLink(
+        route: this,
+        parameters: parameters!,
+      );
+
+  void navigate({
+    required BuildContext context,
+    TPageParameters? parameters,
+    bool clearHistory = false,
+    bool removeCurrent = false,
+  }) =>
+      context.routeDelegate.navigateToPage(
+        create(parameters: parameters!),
+        clearHistory: clearHistory,
+        removeCurrent: removeCurrent,
+      );
+
   @override
   operator ==(Object o) {
     if (identical(this, o)) return true;
