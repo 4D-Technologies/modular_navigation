@@ -14,3 +14,13 @@ Modular Navigation is designed for future functionality for code splitting on fl
 2. Implement MaterialApp.router and pass the parameters similar to how the example does it.
 3. Every page in your app should inherit from ModularPage and define the parameters that it will accept.
 4. Use context.navigateTo() extension method to navigate around your app with the strongly typed version of the pages.
+
+## Help Wanted
+
+Any help that you can provide would be greatly appreciated. Specifically the following areas would be of great assistance:
+
+1. Add ModularLink example for late bound navigation to the example project.
+2. Add Route Guard example to the example project.
+3. Make the example project pages more expressive.
+4. Add more documentation and screen shots for here.
+5. Add unit tests.
