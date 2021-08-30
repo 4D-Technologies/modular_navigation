@@ -38,8 +38,15 @@ class ModularRouteInformationParser
 
     if (route == null) throw RouteNotFoundException();
 
+    var uri = Uri.parse(route.route);
+
+    if (configuration.parameters.map.isNotEmpty)
+      uri = uri.replace(
+        queryParameters: configuration.parameters.map,
+      );
+
     return RouteInformation(
-      location: route.route,
+      location: uri.toString(),
       state: configuration.parameters.map,
     );
   }

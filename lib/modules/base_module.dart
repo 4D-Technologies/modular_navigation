@@ -3,7 +3,7 @@ part of modular_navigation;
 abstract class BaseModule {
   String get route;
 
-  Iterable<ModularRoute> get routes;
+  Iterable<BaseModularRoute> get routes;
   Iterable<BaseModule> get subModules;
 
   final FutureOr<bool> Function(
@@ -13,11 +13,11 @@ abstract class BaseModule {
 
   bool hasRoute(String route) => routes.any((m) => m.route == route);
 
-  ModularRoute? findRoute(String route) {
+  BaseModularRoute? findRoute(String route) {
     if (!route.toLowerCase().startsWith(this.route.toLowerCase())) return null;
 
     var result = routes
-        .cast<ModularRoute?>()
+        .cast<BaseModularRoute?>()
         .firstWhere((e) => e != null && e.route == route, orElse: () => null);
 
     if (result != null) return result;
@@ -29,22 +29,22 @@ abstract class BaseModule {
     return result;
   }
 
-  ModularRoute<TPageParameters, ModularPage<TPageParameters>>?
+  BaseModularRoute<TPageParameters, ModularPage<TPageParameters>>?
       findRouteByPageType<TPageParameters extends PageParameters>(
           Type pageType) {
-    var result = routes.cast<ModularRoute?>().firstWhere(
+    var result = routes.cast<BaseModularRoute?>().firstWhere(
         (e) => e != null && e.isPageRoute(pageType),
         orElse: () => null);
 
     if (result != null)
       return result
-          as ModularRoute<TPageParameters, ModularPage<TPageParameters>>;
+          as BaseModularRoute<TPageParameters, ModularPage<TPageParameters>>;
 
     result = subModules
         .map((e) => e.findRouteByPageType(pageType))
         .firstWhere((element) => element != null, orElse: () => null);
 
     return result
-        as ModularRoute<TPageParameters, ModularPage<TPageParameters>>?;
+        as BaseModularRoute<TPageParameters, ModularPage<TPageParameters>>?;
   }
 }

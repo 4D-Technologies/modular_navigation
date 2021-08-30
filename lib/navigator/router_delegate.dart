@@ -70,17 +70,52 @@ class ModularRouterDelegate extends RouterDelegate<ModularPage>
     );
   }
 
+  FutureOr<bool> testGuards<TPageParameters extends PageParameters,
+          TModularPage extends ModularPage<TPageParameters>>(
+      BaseModularRoute route,
+      ModularHistory<TPageParameters, TModularPage> history) async {
+    final guards = List<
+        FutureOr<bool> Function(ModularHistory route,
+            ModularRouterDelegate delegate)>.empty(growable: true);
+
+    if (route.guard != null) guards.add(route.guard!);
+
+    if (!route.overrideModuleGuard) addModuleGuards(route.module, guards);
+
+    for (var j = 0; j < guards.length; j++) {
+      if (!await guards[j](
+        history,
+        this,
+      )) return false;
+    }
+
+    return true;
+  }
+
+  void addModuleGuards(
+      BaseModule module,
+      List<
+              FutureOr<bool> Function(
+                  ModularHistory route, ModularRouterDelegate delegate)>
+          guards) {
+    if (module.guard != null) guards.insert(0, module.guard!);
+
+    if (module is SubModule) {
+      if (module.overrideParentGuards) return;
+
+      addModuleGuards(module.parentModule, guards);
+    }
+  }
+
   FutureOr<void> _completeNavigation({
-    required ModularRoute route,
+    required BaseModularRoute route,
     required ModularPage page,
     required bool clearHistory,
     required bool removeCurrent,
   }) async {
     final fullRoute = ModularHistory(route, page);
 
-    if ((route.module.guard != null &&
-            !await route.module.guard!(fullRoute, this)) ||
-        (route.guard != null && !await route.guard!(fullRoute, this))) return;
+    if (!await testGuards(route, fullRoute)) return;
 
     if (clearHistory) {
       _history.clear();

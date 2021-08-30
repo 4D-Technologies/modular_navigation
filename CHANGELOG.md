@@ -1,4 +1,9 @@
-## [0.0.19] - August 24th, 2021
+## [0.0.25] - August 30, 2021
+
+- Fix a bug that was preventing the web browser's URI from being updated with any query string parameters for page deep linking and refresh.
+- Make guards recursive up the tree of modules unless explicitly blocked using override parameters or routes and sub modules.
+
+## [0.0.23] - August 24th, 2021
 
 - Remove context extensions that could lead to untyped navigation and bugs.
 

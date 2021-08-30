@@ -1,7 +1,7 @@
 part of modular_navigation;
 
 class NoPageParametersRoute<TModularPage extends ModularPage<NoPageParameters>>
-    extends ModularRoute<NoPageParameters, TModularPage> {
+    extends BaseModularRoute<NoPageParameters, TModularPage> {
   NoPageParametersRoute(
       {required BaseModule module,
       required String route,
@@ -16,29 +16,22 @@ class NoPageParametersRoute<TModularPage extends ModularPage<NoPageParameters>>
           guard: guard,
         );
 
-  @override
-  ModularLink<PageParameters> createLink({
-    NoPageParameters? parameters = const NoPageParameters(),
-  }) {
-    return super.createLink(parameters: parameters);
+  ModularLink<PageParameters> createLink() {
+    return super._createLink(parameters: NoPageParameters());
   }
 
-  @override
-  TModularPage create(
-      {NoPageParameters? parameters = const NoPageParameters()}) {
-    return super.create(parameters: parameters) as TModularPage;
+  TModularPage create() {
+    return super._create(parameters: NoPageParameters()) as TModularPage;
   }
 
-  @override
   void navigate({
     required BuildContext context,
-    NoPageParameters? parameters = const NoPageParameters(),
     bool clearHistory = false,
     bool removeCurrent = false,
   }) {
-    super.navigate(
+    super._navigate(
       context: context,
-      parameters: parameters,
+      parameters: NoPageParameters(),
       clearHistory: clearHistory,
       removeCurrent: removeCurrent,
     );

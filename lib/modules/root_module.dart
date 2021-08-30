@@ -1,9 +1,9 @@
 part of modular_navigation;
 
 abstract class RootModule extends BaseModule {
-  ModularRoute get initialRoute;
-  ModularRoute get homeRoute;
-  ModularRoute get notFoundRoute;
+  BaseModularRoute get initialRoute;
+  BaseModularRoute get homeRoute;
+  BaseModularRoute get notFoundRoute;
 
   const RootModule({
     FutureOr<bool> Function(

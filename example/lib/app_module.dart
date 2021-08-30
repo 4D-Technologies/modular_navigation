@@ -13,7 +13,8 @@ class AppModule extends RootModule {
     subPagesModule = SubPagesModule(this);
   }
 
-  get loginRoute => ModularRoute<LoginPageParameters, LoginPage>(
+  ModularRoute<LoginPageParameters, LoginPage> get loginRoute =>
+      ModularRoute<LoginPageParameters, LoginPage>(
         module: this,
         route: "login",
         createPage: (params) => LoginPage(
@@ -22,25 +23,26 @@ class AppModule extends RootModule {
       );
 
   @override
-  get homeRoute => NoPageParametersRoute<HomePage>(
+  NoPageParametersRoute<HomePage> get homeRoute => NoPageParametersRoute(
         module: this,
         route: "",
         createPage: () => HomePage(),
       );
 
   @override
-  get initialRoute =>
+  NoPageParametersRoute<HomePage> get initialRoute =>
       homeRoute; //This can be a splash screen if you have more configuration to complete and then navigate away once you're done as an example.
 
   @override
-  get notFoundRoute => ModularRoute<NoPageParameters, NotFoundPage>(
+  NoPageParametersRoute<NotFoundPage> get notFoundRoute =>
+      NoPageParametersRoute(
         module: this,
         route: "/notfound",
-        createPage: (_) => NotFoundPage(),
+        createPage: () => NotFoundPage(),
       );
 
   @override
-  Iterable<ModularRoute> get routes => [
+  Iterable<BaseModularRoute> get routes => [
         homeRoute,
         initialRoute,
         notFoundRoute,

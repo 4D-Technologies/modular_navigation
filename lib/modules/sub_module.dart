@@ -3,9 +3,12 @@ part of modular_navigation;
 abstract class SubModule extends BaseModule {
   final BaseModule parentModule;
   final String _path;
+  final bool overrideParentGuards;
+
   const SubModule({
     required this.parentModule,
     required String route,
+    this.overrideParentGuards = false,
     FutureOr<bool> Function(
             ModularHistory route, ModularRouterDelegate delegate)?
         guard,

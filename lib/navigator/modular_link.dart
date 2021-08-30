@@ -1,7 +1,7 @@
 part of modular_navigation;
 
 class ModularLink<TPageParameters extends PageParameters> {
-  final ModularRoute<TPageParameters, ModularPage<TPageParameters>> route;
+  final BaseModularRoute<TPageParameters, ModularPage<TPageParameters>> route;
   final TPageParameters? parameters;
   const ModularLink({
     required this.route,
@@ -19,6 +19,10 @@ class ModularLink<TPageParameters extends PageParameters> {
       removeCurrent: removeCurrent,
     );
   }
+
+  Uri get uri => Uri.parse(route.route).replace(
+        queryParameters: (parameters ?? NoPageParameters()).map,
+      );
 
   @override
   bool operator ==(Object other) {

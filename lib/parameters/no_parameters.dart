@@ -11,5 +11,5 @@ class NoPageParameters extends PageParameters {
   }
 
   @override
-  int get hashCode => 0;
+  int get hashCode => map.hashCode;
 }
