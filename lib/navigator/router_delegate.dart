@@ -184,11 +184,7 @@ class ModularRouterDelegate extends RouterDelegate<ModularPage>
   Future<void> setInitialRoutePath(ModularPage<PageParameters> configuration) {
     if (setInitialRoutePathOverride != null) {
       configuration = setInitialRoutePathOverride!(configuration);
-    } else {
-      configuration =
-          rootModule.initialRoute.createPage(NoPageParameters().map);
     }
-
     return super.setInitialRoutePath(configuration);
   }
 }

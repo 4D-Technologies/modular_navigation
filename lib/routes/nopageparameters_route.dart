@@ -2,18 +2,35 @@ part of modular_navigation;
 
 class NoPageParametersRoute<TModularPage extends ModularPage<NoPageParameters>>
     extends BaseModularRoute<NoPageParameters, TModularPage> {
-  NoPageParametersRoute(
-      {required BaseModule module,
-      required String route,
-      required TModularPage Function() createPage,
-      FutureOr<bool> Function(
-              ModularHistory route, ModularRouterDelegate delegate)?
-          guard})
-      : super(
+  NoPageParametersRoute({
+    required BaseModule module,
+    required String route,
+    required TModularPage Function() createPage,
+    FutureOr<bool> Function(
+            ModularHistory route, ModularRouterDelegate delegate)?
+        guard,
+    bool overrideModuleGuard = false,
+  }) : super(
           module: module,
           route: route,
           createPage: (params) => createPage(),
           guard: guard,
+          overrideModuleGuard: overrideModuleGuard,
+        );
+
+  NoPageParametersRoute.getIt({
+    required BaseModule module,
+    required String route,
+    FutureOr<bool> Function(
+            ModularHistory route, ModularRouterDelegate delegate)?
+        guard,
+    bool overrideModuleGuard = false,
+  }) : super(
+          module: module,
+          route: route,
+          guard: guard,
+          overrideModuleGuard: overrideModuleGuard,
+          createPage: (params) => GetIt.instance.get<TModularPage>(),
         );
 
   ModularLink<PageParameters> createLink() {

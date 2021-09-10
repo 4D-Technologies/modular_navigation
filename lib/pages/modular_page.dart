@@ -4,7 +4,7 @@ abstract class ModularPage<TPageParameters extends PageParameters>
     extends Page<Widget> {
   final TPageParameters parameters;
 
-  final Animation? animation;
+  final Animation<dynamic>? animation;
 
   ModularPage({
     required this.parameters,

@@ -3,18 +3,42 @@ part of modular_navigation;
 class ModularRoute<TPageParameters extends PageParameters,
         TModularPage extends ModularPage<TPageParameters>>
     extends BaseModularRoute<TPageParameters, TModularPage> {
-  ModularRoute(
-      {required BaseModule module,
-      required String route,
-      required TModularPage Function(Map<String, String?> params) createPage,
-      FutureOr<bool> Function(
-              ModularHistory route, ModularRouterDelegate delegate)?
-          guard})
-      : super(
+  ModularRoute({
+    required BaseModule module,
+    required String route,
+    required TModularPage Function(Map<String, String?> params) createPage,
+    FutureOr<bool> Function(
+      ModularHistory route,
+      ModularRouterDelegate delegate,
+    )?
+        guard,
+    bool overrideModuleGuard = false,
+  }) : super(
           module: module,
           route: route,
           createPage: createPage,
           guard: guard,
+          overrideModuleGuard: overrideModuleGuard,
+        );
+
+  ModularRoute.getIt({
+    required BaseModule module,
+    required String route,
+    required TPageParameters Function(Map<String, String?> params) createParams,
+    FutureOr<bool> Function(
+      ModularHistory route,
+      ModularRouterDelegate delegate,
+    )?
+        guard,
+    bool overrideModuleGuard = false,
+  }) : super(
+          module: module,
+          route: route,
+          createPage: (params) => GetIt.instance.get<TModularPage>(
+            param1: createParams(params),
+          ),
+          guard: guard,
+          overrideModuleGuard: overrideModuleGuard,
         );
 
   ModularLink<TPageParameters> createLink(TPageParameters parameters) {

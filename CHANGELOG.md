@@ -1,3 +1,18 @@
+## [0.0.28] - September 10th, 2021
+
+- Upgrade to Dart 2.14/Flutter 2.2
+- Enable Flutter_lint
+- Fix linting warnings/errors
+
+## [0.0.27] - September 2, 2021
+
+- Fix routes didn't allow override of parent guards in the constructors
+- Add getIt support for creating routes so that getIt ensures strong types for parameters at all times, eliminating a possible type missmatch if not set correctly when generating routes.
+
+## [0.0.26] - September 1, 2021
+
+- Fix issue where refresh in a web browser didn't work and would redirect to home page.
+
 ## [0.0.25] - August 30, 2021
 
 - Fix a bug that was preventing the web browser's URI from being updated with any query string parameters for page deep linking and refresh.
