@@ -7,11 +7,11 @@ class SubPage2 extends NoParametersModularPage {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Text("Sub Page 2"),
+        body: const Text("Sub Page 2"),
         floatingActionButton: FloatingActionButton(
           heroTag: "Home",
           onPressed: () => MyApp.appModule.homeRoute.navigate(context: context),
-          child: Icon(Icons.home),
+          child: const Icon(Icons.home),
         ),
       ),
     );

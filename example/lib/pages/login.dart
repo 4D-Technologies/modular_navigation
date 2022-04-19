@@ -16,12 +16,13 @@ class LoginPage extends ModularPage<LoginPageParameters> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: IconButton(
+        body: TextButton.icon(
+          label: const Text("Login"),
           onPressed: () {
             MyApp.loggedIn = true;
             context.navigateToUri(parameters.redirectUrl);
           },
-          icon: Icon(Icons.login),
+          icon: const Icon(Icons.login),
         ),
       ),
     );

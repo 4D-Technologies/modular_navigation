@@ -1,11 +1,11 @@
 import 'package:example/app_module.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:modular_navigation/modular_navigation.dart';
 
+import 'url_strategy/url_strategy.dart';
+
 void main() {
-  if (kIsWeb) setUrlStrategy(PathUrlStrategy());
+  usePathUrlStrategy();
   runApp(MyApp());
 }
 

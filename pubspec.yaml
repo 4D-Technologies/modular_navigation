@@ -1,11 +1,11 @@
 name: modular_navigation
 description: Modular Navigation
-version: 0.0.28
-homepage: https://github.com/Concerti-IO/modular_navigation
+version: 0.0.29
+homepage: https://github.com/4D-Technologies/modular_navigation
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
-  flutter: ">=2.5.0"
+  sdk: ">=2.16.0 <3.0.0"
+  flutter: ">=2.10.0"
 
 dependencies:
   flutter:

@@ -1,3 +1,8 @@
+## [0.0.29] - April 19th, 2022
+
+- Upgrade to Dart 2.16/Flutter 2.10
+- Fix issue with the example project on android and ios.
+
 ## [0.0.28] - September 10th, 2021
 
 - Upgrade to Dart 2.14/Flutter 2.2
