@@ -1,3 +1,7 @@
+## [0.0.30] - May 18th, 2022
+
+- Upgrade to Dart 2.17/Flutter 3
+
 ## [0.0.29] - April 19th, 2022
 
 - Upgrade to Dart 2.16/Flutter 2.10

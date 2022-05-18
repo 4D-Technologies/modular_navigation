@@ -6,7 +6,7 @@ import 'url_strategy/url_strategy.dart';
 
 void main() {
   usePathUrlStrategy();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
   static final appModule = AppModule();
   static final routerDelegate =
       ModularRouterDelegate(navigatorKey: navigatorKey, rootModule: appModule);
+
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
